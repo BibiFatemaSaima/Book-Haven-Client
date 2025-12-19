@@ -14,9 +14,12 @@ const AllBooks = () => {
           </figure>
           <div className="card-body">
             <h2 className="card-title">Card Title</h2>
-            <p>title:{book.author}</p>
+            <p>Title: {book.author}</p>
+            <p>Summary: {book.summary}</p>
+            <p>Rating: {book.rating}</p>
+            <p>UserEmail: {book.userEmail}</p>
             <div className="card-actions justify-end">
-              <button className="btn btn-primary">Buy Now</button>
+              <button className="btn btn-primary">view Details</button>
             </div>
           </div>
         </div>
