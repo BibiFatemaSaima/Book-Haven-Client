@@ -1,0 +1,181 @@
+[
+  {
+    "title": "The Silent Forest",
+    "author": "Emily Carter",
+    "genre": "Fantasy",
+    "rating": 4.5,
+    "summary": "A young girl discovers a magical forest that hides an ancient secret.",
+    "coverImage": "https://i.ibb.co.com/vfZSR2D/91-D8v-CU1g2-L-UF1000-1000-QL80.jpg",
+    "userEmail": "user1@gmail.com"
+  },
+  {
+    "title": "Shadows of Dhaka",
+    "author": "Aminul Islam",
+    "genre": "Mystery",
+    "rating": 4.2,
+    "summary": "A detective investigates a series of mysterious disappearances in the city.",
+    "coverImage": "https://i.ibb.co.com/0pjPbZvC/emblematic-elements-city-template-vector-icon-building-urban-art-dhaka-bangladesh-asia-design-skylin.webp",
+    "userEmail": "user2@gmail.com"
+  },
+  {
+    "title": "The Last Algorithm",
+    "author": "James Walker",
+    "genre": "Science Fiction",
+    "rating": 4.7,
+    "summary": "A programmer creates an AI that begins to rewrite human destiny.",
+    "coverImage": "https://i.ibb.co.com/PGGxXGRY/71g-Yib-Wj-YUL-UF894-1000-QL80.jpg",
+    "userEmail": "user3@gmail.com"
+  },
+  {
+    "title": "Mind Over Matter",
+    "author": "Sarah Collins",
+    "genre": "Non-Fiction",
+    "rating": 4.1,
+    "summary": "An exploration of how mindset shapes success and failure.",
+    "coverImage": "https://i.ibb.co.com/7t01kCHB/mind-over-matter-strength-smarts-highlights-power-mental-resilience-determination-mind-over-matter-s.webp",
+    "userEmail": "user4@gmail.com"
+  },
+  {
+    "title": "Crimson Crown",
+    "author": "Liam O'Connor",
+    "genre": "Fantasy",
+    "rating": 4.6,
+    "summary": "A fallen prince fights to reclaim his throne.",
+    "coverImage": "https://i.ibb.co.com/5qBgYTH/9781804951989-jacket-large.webp",
+    "userEmail": "user5@gmail.com"
+  },
+  {
+    "title": "Broken Alibi",
+    "author": "Nora Hughes",
+    "genre": "Thriller",
+    "rating": 4.3,
+    "summary": "A lawyer uncovers the truth behind a seemingly open-and-shut case.",
+    "coverImage": "https://i.ibb.co.com/bgw52MVM/images.jpg",
+    "userEmail": "user6@gmail.com"
+  },
+  {
+    "title": "Echoes of 1971",
+    "author": "Rahman Kabir",
+    "genre": "History",
+    "rating": 4.8,
+    "summary": "A powerful account of Bangladesh’s liberation war.",
+    "coverImage": "https://i.ibb.co.com/9mxnkzyD/hq720.jpg",
+    "userEmail": "user7@gmail.com"
+  },
+  {
+    "title": "The Startup Blueprint",
+    "author": "Daniel Reed",
+    "genre": "Business",
+    "rating": 4.0,
+    "summary": "A step-by-step guide to building a successful startup.",
+    "coverImage": "https://m.media-amazon.com/images/I/61WpG68bb4L._AC_UF1000,1000_QL80_.jpg",
+    "userEmail": "user8@gmail.com"
+  },
+  {
+    "title": "Midnight Train",
+    "author": "Olivia Brown",
+    "genre": "Mystery",
+    "rating": 4.4,
+    "summary": "Strangers aboard a train share dark, unexpected connections.",
+    "coverImage": "https://i.ibb.co.com/My17dRnH/artworks-78oeuz-BL9-RAPXWw-L-U4z6z-A-t500x500.jpg",
+    "userEmail": "user9@gmail.com"
+  },
+  {
+    "title": "Love Beyond Time",
+    "author": "Sophia Martinez",
+    "genre": "Romance",
+    "rating": 3.9,
+    "summary": "A love story that transcends decades and distance.",
+    "coverImage": "https://i.ibb.co.com/675HrLL2/71-Ij-Eg-9-JFL-AC-UF1000-1000-QL80.jpg",
+    "userEmail": "user10@gmail.com"
+  },
+  {
+    "title": "Code & Coffee",
+    "author": "Alex Turner",
+    "genre": "Technology",
+    "rating": 4.6,
+    "summary": "A developer’s journey through bugs, burnout, and breakthroughs.",
+    "coverImage": "https://i.ibb.co.com/Gv1BJbDm/1-zo7f-Bko1-Xoo-Jvu-Ta6y-Swcw.jpg",
+    "userEmail": "user11@gmail.com"
+  },
+  {
+    "title": "The Hidden Door",
+    "author": "Megan Price",
+    "genre": "Horror",
+    "rating": 4.2,
+    "summary": "https://i.ibb.co.com/wrs2qyFt/hq720-1.jpg",
+    "userEmail": "user12@gmail.com"
+  },
+  {
+    "title": "Minimal Living",
+    "author": "Jason Kim",
+    "genre": "Self-Help",
+    "rating": 4.1,
+    "summary": "How living with less can give you more freedom.",
+    "coverImage": "https://i.ibb.co.com/rRhvsDRW/Brad-Ramsey-Interiors-credit-Caroline-Sharpnack-dee35c1fab554898af7c549697c2f592.jpg",
+    "userEmail": "user13@gmail.com"
+  },
+  {
+    "title": "Galaxy Run",
+    "author": "Chris Nolan",
+    "genre": "Science Fiction",
+    "rating": 4.5,
+    "summary": "A race across galaxies to save the human race.",
+    "coverImage": "https://i.ibb.co.com/fz7yrFyv/8e0d98-78defcf307df43d083e43d8ff584b43a-mv2.avif",
+    "userEmail": "user14@gmail.com"
+  },
+  {
+    "title": "Whispers in Rain",
+    "author": "Anika Chowdhury",
+    "genre": "Poetry",
+    "rating": 4.0,
+    "summary": "A poetic reflection on love, loss, and healing.",
+    "coverImage": "https://i.ibb.co.com/99ZRQmP8/m2kpqyz-ebook-shortedge-384.jpg",
+    "userEmail": "user15@gmail.com"
+  },
+  {
+    "title": "The Psychology of Habits",
+    "author": "Robert Allen",
+    "genre": "Psychology",
+    "rating": 4.7,
+    "summary": "Why habits form and how to change them effectively.",
+    "coverImage": "https://cdn.gramedia.com/uploads/product-metas/y7sz0exhlh.jpg",
+    "userEmail": "user16@gmail.com"
+  },
+  {
+    "title": "Desert Storm",
+    "author": "Mark Stevenson",
+    "genre": "Adventure",
+    "rating": 4.3,
+    "summary": "A survival story set in the harsh desert wilderness.",
+    "coverImage": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/USAF_F-16A_F-15C_F-15E_Desert_Storm_edit2.jpg/1200px-USAF_F-16A_F-15C_F-15E_Desert_Storm_edit2.jpg",
+    "userEmail": "user17@gmail.com"
+  },
+  {
+    "title": "Digital Nomad Life",
+    "author": "Laura Chen",
+    "genre": "Lifestyle",
+    "rating": 3.8,
+    "summary": "Working remotely while traveling the world.",
+    "coverImage": "https://i.ibb.co.com/mrMsRJV6/article-exploringthe-digital-nomad.jpg",
+    "userEmail": "user18@gmail.com"
+  },
+  {
+    "title": "The Final Verdict",
+    "author": "Henry Adams",
+    "genre": "Crime",
+    "rating": 4.4,
+    "summary": "A courtroom drama where nothing is as it seems.",
+    "coverImage": "https://i.ibb.co.com/KjdQHVBv/BK-FV.jpg",
+    "userEmail": "user19@gmail.com"
+  },
+  {
+    "title": "Roots of Tomorrow",
+    "author": "Fatima Noor",
+    "genre": "Environment",
+    "rating": 4.6,
+    "summary": "A hopeful look at sustainable living and green futures.",
+    "coverImage": "https://i.ibb.co.com/TDMKwtHC/roots-of-tomorrow-ios-android-launch-cover.jpg",
+    "userEmail": "user20@gmail.com"
+  }
+]
