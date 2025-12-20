@@ -1,7 +1,8 @@
 import React, { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../../../components/AuthContext/AuthContext";
-
+import { GoogleAuthProvider } from "firebase/auth";
+const googleAuthProvider = new GoogleAuthProvider();
 const Login = () => {
   const { signInUser, signInWithGoogle } = useContext(AuthContext);
   const [error, setError] = useState("");

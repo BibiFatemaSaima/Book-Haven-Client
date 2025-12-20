@@ -1,31 +1,43 @@
 import React from "react";
-import { useLoaderData } from "react-router";
+import { useLoaderData, useNavigate } from "react-router";
 
 const AllBooks = () => {
-  const data = useLoaderData(); 
+  const data = useLoaderData();
+  const navigate = useNavigate();
+
+  // View Details
   const handleDetailsClick = (book) => {
-    console.log("datails Button Click", book);
+    navigate(`/books/${book._id}`);
   };
+
+  // Delete Book
   const handleDeleteClick = async (book) => {
     const id = book._id;
-    console.log("delete book", id);
-    // see error
+
+    const confirmDelete = confirm("Are you sure you want to delete this book?");
+    if (!confirmDelete) return;
+
     try {
-      const result = await fetch(`http://localhost:3000/delete/${id}`, {
+      const res = await fetch(`http://localhost:3000/delete/${id}`, {
         method: "DELETE",
       });
-      if (!result.ok) {
-        console.log("not delete");
+
+      if (!res.ok) {
+        console.log("Delete failed");
         return;
       }
-      console.log("successful");
+
+      console.log("Book deleted successfully");
+      // Assignment level improvement: reload data
+      window.location.reload();
     } catch (error) {
-      console.log(error);
+      console.log("Delete error:", error);
     }
   };
 
+  // Loader safety check
   if (!data || !Array.isArray(data)) {
-    return <p className="text-center p-10">No books found or loading...</p>;
+    return <p className="text-center p-10">No books found</p>;
   }
 
   return (
@@ -42,28 +54,29 @@ const AllBooks = () => {
               alt={book.title}
             />
           </figure>
+
           <div className="card-body">
             <h2 className="card-title text-lg font-bold">{book.title}</h2>
+
             <p>
               <span className="font-semibold">Author:</span> {book.author}
             </p>
+
             <p className="line-clamp-2 text-sm text-gray-600">{book.summary}</p>
+
             <div className="card-actions justify-end mt-4">
               <button
-                onClick={() => {
-                  handleDetailsClick(book);
-                }}
+                onClick={() => handleDetailsClick(book)}
                 className="btn btn-primary btn-sm"
               >
                 View Details
               </button>
+
               <button
-                onClick={() => {
-                  handleDeleteClick(book);
-                }}
-                className="btn btn-primary btn-sm"
+                onClick={() => handleDeleteClick(book)}
+                className="btn btn-error btn-sm"
               >
-                Detete
+                Delete
               </button>
             </div>
           </div>

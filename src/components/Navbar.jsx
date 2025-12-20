@@ -86,6 +86,36 @@ const Navbar = () => {
               Login
             </NavLink>
           </li>
+          <li>
+            <NavLink
+              to="/register"
+              className={({ isActive }) =>
+                isActive ? "text-blue-600 font-bold" : ""
+              }
+            >
+              Register
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/add-book"
+              className={({ isActive }) =>
+                isActive ? "text-blue-600 font-bold" : ""
+              }
+            >
+              AddBook
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/my-book"
+              className={({ isActive }) =>
+                isActive ? "text-blue-600 font-bold" : ""
+              }
+            >
+             MyBooks
+            </NavLink>
+          </li>
         </ul>
       </div>
       <div className="navbar-end">
