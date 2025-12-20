@@ -1,33 +1,12 @@
 import React from "react";
 import { useLoaderData } from "react-router";
 
-const AllBooks = () => {
-  const data = useLoaderData(); 
-  const handleDetailsClick = (book) => {
-    console.log("datails Button Click", book);
-  };
-  const handleDeleteClick = async (book) => {
-    const id = book._id;
-    console.log("delete book", id);
-    // see error
-    try {
-      const result = await fetch(`http://localhost:3000/delete/${id}`, {
-        method: "DELETE",
-      });
-      if (!result.ok) {
-        console.log("not delete");
-        return;
-      }
-      console.log("successful");
-    } catch (error) {
-      console.log(error);
-    }
-  };
+const BookService = () => {
+  const data = useLoaderData();
 
   if (!data || !Array.isArray(data)) {
     return <p className="text-center p-10">No books found or loading...</p>;
   }
-
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-5">
       {data.map((book) => (
@@ -47,24 +26,17 @@ const AllBooks = () => {
             <p>
               <span className="font-semibold">Author:</span> {book.author}
             </p>
+            <p>
+              <span className="font-semibold">Genre:</span> {book.genre}
+            </p>
             <p className="line-clamp-2 text-sm text-gray-600">{book.summary}</p>
+            <div className="flex justify-between items-center mt-2">
+              <span className="badge badge-secondary">
+                Rating: {book.rating}
+              </span>
+            </div>
             <div className="card-actions justify-end mt-4">
-              <button
-                onClick={() => {
-                  handleDetailsClick(book);
-                }}
-                className="btn btn-primary btn-sm"
-              >
-                View Details
-              </button>
-              <button
-                onClick={() => {
-                  handleDeleteClick(book);
-                }}
-                className="btn btn-primary btn-sm"
-              >
-                Detete
-              </button>
+              <button className="btn btn-primary btn-sm">View Details</button>
             </div>
           </div>
         </div>
@@ -73,4 +45,4 @@ const AllBooks = () => {
   );
 };
 
-export default AllBooks;
+export default BookService;
