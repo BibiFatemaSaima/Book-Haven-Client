@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { AuthContext } from "./AuthContext";
+import { AuthContext } from "../AuthContext/AuthContext";
 import {
   createUserWithEmailAndPassword,
   GoogleAuthProvider,
@@ -37,39 +37,37 @@ const AuthProvider = ({ children }) => {
     return signOut(auth);
   };
 
-  // 🔥 NEW: update profile function
   const updateUserProfile = (name, photoURL) => {
-    if (!auth.currentUser) return;
-
     return updateProfile(auth.currentUser, {
       displayName: name,
       photoURL: photoURL,
     });
   };
 
-  // get current user info
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       setLoading(false);
     });
-
-    return () => {
-      unsubscribe();
-    };
+    return () => unsubscribe();
   }, []);
 
   const authInfo = {
     user,
+    setUser,
     loading,
     createUser,
     signInUser,
     signInWithGoogle,
-    signOutUser,
-    updateUserProfile, // 🔥 added here
+    signOutUser, // ✅ correct
+    updateUserProfile,
   };
 
-  return <AuthContext value={authInfo}>{children}</AuthContext>;
+  return (
+    <AuthContext.Provider value={authInfo}>
+      {children}
+    </AuthContext.Provider>
+  );
 };
 
 export default AuthProvider;

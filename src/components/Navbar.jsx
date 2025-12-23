@@ -1,9 +1,22 @@
-import React from "react";
+import React, { useContext } from "react";
 import { NavLink } from "react-router";
+import { AuthContext } from "../components/AuthContext/AuthContext";
 
 const Navbar = () => {
+  const { user, signOutUser } = useContext(AuthContext);
+
+  const handleLogout = () => {
+    signOutUser()
+      .then(() => console.log("Logout successful"))
+      .catch((error) => console.error(error));
+  };
+
+  const activeClass = ({ isActive }) =>
+    isActive ? "text-blue-600 font-semibold" : "";
+
   return (
-    <div className="navbar bg-base-100 shadow-sm">
+    <div className="navbar bg-base-100 shadow-sm px-4">
+      {/* left */}
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -14,112 +27,144 @@ const Navbar = () => {
               viewBox="0 0 24 24"
               stroke="currentColor"
             >
-              {" "}
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth="2"
                 d="M4 6h16M4 12h8m-8 6h16"
-              />{" "}
+              />
             </svg>
           </div>
+
+          {/* mobile menu */}
           <ul
-            tabIndex="-1"
-            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+            tabIndex={0}
+            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-10 mt-3 w-52 p-2 shadow"
           >
             <li>
-              <NavLink
-                to="/"
-                className={({ isActive }) =>
-                  isActive ? "text-blue-600 font-bold" : ""
-                }
-              >
+              <NavLink to="/" className={activeClass}>
                 Home
               </NavLink>
             </li>
             <li>
-              <NavLink
-                to="/all-books"
-                className={({ isActive }) =>
-                  isActive ? "text-blue-600 font-bold" : ""
-                }
-              >
-                AllBook
+              <NavLink to="/all-books" className={activeClass}>
+                AllBooks
               </NavLink>
             </li>
-            <li>
-              <a>Item 3</a>
-            </li>
+
+            {user && (
+              <>
+                <li>
+                  <NavLink to="/add-book" className={activeClass}>
+                    AddBook
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/my-book" className={activeClass}>
+                    MyBooks
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/my-profile" className={activeClass}>
+                    MyProfile
+                  </NavLink>
+                </li>
+              </>
+            )}
           </ul>
         </div>
-        <a className="btn btn-ghost text-xl">The Book Haven</a>
+
+        <NavLink to="/" className="btn btn-ghost text-xl">
+          The Book Haven
+        </NavLink>
       </div>
+
+      {/* center */}
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">
+        <ul className="menu menu-horizontal px-1 gap-2">
           <li>
-            <NavLink
-              to="/"
-              className={({ isActive }) =>
-                isActive ? "text-blue-600 font-bold" : ""
-              }
-            >
+            <NavLink to="/" className={activeClass}>
               Home
             </NavLink>
           </li>
           <li>
-            <NavLink
-              to="/all-books"
-              className={({ isActive }) =>
-                isActive ? "text-blue-600 font-bold" : ""
-              }
-            >
-              AllBook
+            <NavLink to="/all-books" className={activeClass}>
+              AllBooks
             </NavLink>
           </li>
-          <li>
-            <NavLink
-              to="/login"
-              className={({ isActive }) =>
-                isActive ? "text-blue-600 font-bold" : ""
-              }
-            >
-              Login
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/register"
-              className={({ isActive }) =>
-                isActive ? "text-blue-600 font-bold" : ""
-              }
-            >
-              Register
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/add-book"
-              className={({ isActive }) =>
-                isActive ? "text-blue-600 font-bold" : ""
-              }
-            >
-              AddBook
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/my-book"
-              className={({ isActive }) =>
-                isActive ? "text-blue-600 font-bold" : ""
-              }
-            >
-             MyBooks
-            </NavLink>
-          </li>
+
+          {user ? (
+            <>
+              <li>
+                <NavLink to="/add-book" className={activeClass}>
+                  AddBook
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/my-book" className={activeClass}>
+                  MyBooks
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/my-profile" className={activeClass}>
+                  MyProfile
+                </NavLink>
+              </li>
+            </>
+          ) : (
+            <>
+              <li>
+                <NavLink to="/login" className={activeClass}>
+                  Login
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/register" className={activeClass}>
+                  Register
+                </NavLink>
+              </li>
+            </>
+          )}
         </ul>
       </div>
+
+      {/* right */}
       <div className="navbar-end">
-        <a className="btn">Button</a>
+        {user ? (
+          <div className="flex items-center gap-3">
+            {/* avatar + dropdown */}
+            <div className="dropdown dropdown-end">
+              <div tabIndex={0} className="cursor-pointer">
+                <img
+                  src={user.photoURL || "https://i.ibb.co/4pDNDk1/avatar.png"}
+                  alt="User"
+                  className="w-10 h-10 rounded-full border"
+                />
+              </div>
+
+              <ul
+                tabIndex={0}
+                className="menu dropdown-content bg-base-100 rounded-box shadow mt-3 w-52 p-2"
+              >
+                <li className="px-3 py-2 text-sm text-gray-600">
+                  {user.displayName || "User"}
+                </li>
+                <li>
+                  <NavLink to="/my-profile">My Profile</NavLink>
+                </li>
+                <li>
+                  <button onClick={handleLogout} className="text-error">
+                    Logout
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </div>
+        ) : (
+          <NavLink to="/login" className="btn btn-primary">
+            Login
+          </NavLink>
+        )}
       </div>
     </div>
   );

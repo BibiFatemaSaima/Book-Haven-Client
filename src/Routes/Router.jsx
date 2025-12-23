@@ -9,6 +9,8 @@ import AddBook from "../Pages/Home/Home/AddBook";
 import MyBooks from "../Pages/Home/Home/MyBooks";
 import BookDetails from "../components/BookDetails";
 import PrivateRoute from "./PrivateRoute";
+import BookSlider from "../components/BookSlider";
+import MyProfile from "../Pages/Home/Home/MyProfile";
 
 export const router = createBrowserRouter([
   {
@@ -40,8 +42,16 @@ export const router = createBrowserRouter([
         Component: Register,
       },
       {
+        path: 'Book-slider',
+        Component: BookSlider,
+      },
+      {
         path: "add-book",
         Component: AddBook,
+      },
+      {
+        path: 'my-profile',
+        Component: MyProfile,
       },
       {
         path: "my-book",
