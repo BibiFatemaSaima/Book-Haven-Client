@@ -54,7 +54,7 @@ export const router = createBrowserRouter([
         Component: MyProfile,
       },
       {
-        path: "my-book",
+        path: "my-books",
         Component: MyBooks,
       },
       {

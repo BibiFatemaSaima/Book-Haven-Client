@@ -101,7 +101,7 @@ const Navbar = () => {
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/my-book" className={activeClass}>
+                <NavLink to="/my-books" className={activeClass}>
                   MyBooks
                 </NavLink>
               </li>
