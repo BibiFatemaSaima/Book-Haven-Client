@@ -8,7 +8,7 @@ const Navbar = () => {
   const handleLogout = () => {
     signOutUser()
       .then(() => console.log("Logout successful"))
-      .catch((error) => console.error(error));
+      // .catch((error) => console.error(error));
   };
 
   const activeClass = ({ isActive }) =>

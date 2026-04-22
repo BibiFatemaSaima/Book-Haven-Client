@@ -3,7 +3,7 @@ import { useParams, useNavigate } from "react-router";
 import axios from "axios";
 
 const BookDetails = () => {
-  const { id } = useParams(); // URL থেকে book id নেবে
+  const { id } = useParams();
   const navigate = useNavigate();
   const [book, setBook] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -15,7 +15,7 @@ const BookDetails = () => {
         const response = await axios.get(`http://localhost:3000/books/${id}`);
         setBook(response.data);
       } catch (err) {
-        console.error(err);
+        // console.error(err);
         setError("Failed to fetch book details.");
       } finally {
         setLoading(false);

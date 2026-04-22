@@ -23,7 +23,7 @@ const Login = () => {
         navigate(from, { replace: true });
       })
       .catch((error) => {
-        console.error(error);
+        // console.error(error);
         setError("Invalid email or password. Please try again.");
       });
   };
@@ -34,7 +34,7 @@ const Login = () => {
         navigate(from, { replace: true });
       })
       .catch((error) => {
-        console.error(error);
+        // console.error(error);
         setError("Google sign-in failed. Try again later.");
       });
   };

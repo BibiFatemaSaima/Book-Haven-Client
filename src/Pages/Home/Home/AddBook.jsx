@@ -19,14 +19,14 @@ const AddBook = () => {
       userEmail: user?.email,
     };
 
-    console.log(bookData); // test
+    // console.log(bookData); // test
     axios.post('http:/http://localhost:3000/books', bookData)
       .then(res => {
-      console.log(res);
+      // console.log(res);
       
     })
 
-    // fetch POST এখানে পরে বসাবে
+    
   };
 
   if (!user) {

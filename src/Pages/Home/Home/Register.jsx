@@ -24,10 +24,10 @@ const Register = () => {
           .then(() => {
             console.log("User profile updated!");
           })
-          .catch((err) => console.log(err));
+          // .catch((err) => console.log(err));
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
       });
   };
 

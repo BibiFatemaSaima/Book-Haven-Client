@@ -22,7 +22,7 @@ const MyProfile = () => {
         alert("Profile updated successfully!");
         setIsEditing(false);
       })
-      .catch((err) => console.log(err));
+      // .catch((err) => console.log(err));
   };
 
   return (

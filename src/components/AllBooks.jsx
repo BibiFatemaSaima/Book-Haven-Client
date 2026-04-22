@@ -28,10 +28,10 @@ const AllBooks = () => {
       }
 
       console.log("Book deleted successfully");
-      // Assignment level improvement: reload data
+    
       window.location.reload();
     } catch (error) {
-      console.log("Delete error:", error);
+      // console.log("Delete error:", error);
     }
   };
 
