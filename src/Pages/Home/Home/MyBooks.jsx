@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../components/AuthContext/AuthContext";
+import { Link } from "react-router";
 
 const MyBooks = () => {
   const [MyBooks, setMyBooks] = useState([]);
@@ -10,8 +11,8 @@ const MyBooks = () => {
     if (loading) return;
     fetch(`http://localhost:3000/my-books?email=${user?.email}`)
       .then((res) => res.json())
-      .then((data) => setMyBooks(data))
-      // .catch((err) => console.log(err));
+      .then((data) => setMyBooks(data));
+    // .catch((err) => console.log(err));
   }, [user?.email]);
   return (
     <div>
@@ -23,8 +24,8 @@ const MyBooks = () => {
             <tr>
               <th>Name</th>
               <th>Job</th>
-              <th>Favorite Color</th>
-              <th></th>
+              <th>Price</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
@@ -56,8 +57,11 @@ const MyBooks = () => {
                   <p>{book?.summary}</p>
                 </td>
                 <td>{book?.userEmail}</td>
-                <th>
-                  <button className="btn btn-ghost btn-xs">details</button>
+                <th className="flex gap-3">
+                  <button className="btn btn-error btn-xs">Delete</button>
+                  <Link to={`/update-service/${book?._id}`}>
+                    <button className="btn btn-primary btn-xs">Edit</button>
+                  </Link>
                 </th>
               </tr>
             ))}

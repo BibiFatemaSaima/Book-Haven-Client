@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../../../components/AuthContext/AuthContext";
+import axios from "axios";
 
 const AddBook = () => {
   const { user } = useContext(AuthContext);
@@ -20,9 +21,9 @@ const AddBook = () => {
     };
 
     // console.log(bookData); // test
-    axios.post('http:/http://localhost:3000/books', bookData)
+    axios.post('http://localhost:3000/books', bookData)
       .then(res => {
-      // console.log(res);
+       console.log(res);
       
     })
 
@@ -35,6 +36,7 @@ const AddBook = () => {
 
   return (
     <div className="max-w-3xl mx-auto p-6">
+      <h2 className="text-2xl font-bold mb-4">Create Listing</h2>
       <form onSubmit={handleAddBook} className="space-y-4">
         <div>
           <label className="label">Title</label>

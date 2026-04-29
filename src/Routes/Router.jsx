@@ -11,6 +11,7 @@ import BookDetails from "../components/BookDetails";
 import PrivateRoute from "./PrivateRoute";
 import BookSlider from "../components/BookSlider";
 import MyProfile from "../Pages/Home/Home/MyProfile";
+import UpdateService from "../Pages/UpdateService";
 
 export const router = createBrowserRouter([
   {
@@ -56,6 +57,10 @@ export const router = createBrowserRouter([
       {
         path: "my-books",
         Component: MyBooks,
+      },
+      {
+        path: "update-service/:id",
+        Component: UpdateService,
       },
       {
         path: "books/:id",
