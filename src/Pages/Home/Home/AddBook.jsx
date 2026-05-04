@@ -1,64 +1,40 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { AuthContext } from "../../../components/AuthContext/AuthContext";
 import axios from "axios";
 
 const AddBook = () => {
   const { user } = useContext(AuthContext);
 
-  const [selectedBook, setSelectedBook] = useState({});
-  const [booksData, setBooksData] = useState([]);
-
-  useEffect(() => {
-    axios
-      .get("http://localhost:3000/books")
-      .then((res) => setBooksData(res.data))
-      .catch((err) => console.log(err));
-  }, []);
-
-  const genres = [...new Set(booksData.map((book) => book.genre))];
-
-  const handleGenreChange = (e) => {
-    const selectedGenre = e.target.value;
-
-    const foundBook = booksData.find((book) => book.genre === selectedGenre);
-
-    if (foundBook) {
-      setSelectedBook({
-        ...foundBook,
-        price: foundBook.price || 100,
-      });
-    } else {
-      setSelectedBook((prev) => ({
-        ...prev,
-        genre: selectedGenre,
-      }));
-    }
-  };
-
   const handleAddBook = (e) => {
     e.preventDefault();
     const form = e.target;
 
-    const bookData = {
-      title: form.title.value,
-      author: form.author.value,
-      genre: form.genre.value,
-      rating: parseFloat(form.rating.value),
-      summary: form.summary.value,
-      coverImage: form.coverImage.value,
-      price: parseFloat(form.price.value) || 100,
+    const title = form.title.value;
+    const author = form.author.value;
+    const genre = form.genre.value;
+    const rating = parseFloat(form.rating.value);
+    const price = parseFloat(form.price.value) || 100;
+    const summary = form.summary.value;
+    const coverImage = form.coverImage.value;
+
+    const formData = {
+      title,
+      author,
+      genre,
+      rating,
+      price,
+      summary,
+      coverImage,
       userName: user?.displayName,
       userEmail: user?.email,
     };
 
     axios
-      .post("http://localhost:3000/books", bookData)
+      .post("http://localhost:3000/books", formData)
       .then((res) => {
-        console.log(res);
+        console.log(res.data);
         alert("Book added successfully!");
-
         form.reset();
-        setSelectedBook({});
       })
       .catch((err) => console.log(err));
   };
@@ -69,93 +45,58 @@ const AddBook = () => {
 
   return (
     <div className="max-w-3xl mx-auto p-6">
-      <h2 className="text-2xl font-bold mb-4">Create Listing</h2>
+      <h2 className="text-2xl font-bold mb-4">Add Book</h2>
 
       <form onSubmit={handleAddBook} className="space-y-4">
-        {/* Title */}
         <input
           name="title"
           placeholder="Title"
-          value={selectedBook.title || ""}
-          onChange={(e) =>
-            setSelectedBook({ ...selectedBook, title: e.target.value })
-          }
           className="input w-full"
           required
         />
 
-        {/* Author */}
         <input
           name="author"
           placeholder="Author"
-          value={selectedBook.author || ""}
-          onChange={(e) =>
-            setSelectedBook({ ...selectedBook, author: e.target.value })
-          }
           className="input w-full"
           required
         />
 
-        {/*  Genre Dropdown */}
-        <select
+        <input
           name="genre"
-          value={selectedBook.genre || ""}
-          onChange={handleGenreChange}
-          className="select w-full"
+          placeholder="Genre"
+          className="input w-full"
           required
-        >
-          <option value="">Select Genre</option>
-          {genres.map((genre, i) => (
-            <option key={i} value={genre}>
-              {genre}
-            </option>
-          ))}
-        </select>
+        />
 
-        {/* Rating */}
         <input
           type="number"
           name="rating"
           step="0.1"
           min="0"
           max="5"
-          value={selectedBook.rating || ""}
-          onChange={(e) =>
-            setSelectedBook({ ...selectedBook, rating: e.target.value })
-          }
+          placeholder="Rating"
           className="input w-full"
           required
         />
 
-        {/*  Price */}
         <input
           type="number"
           name="price"
-          value={selectedBook.price || 100}
-          onChange={(e) =>
-            setSelectedBook({ ...selectedBook, price: e.target.value })
-          }
+          placeholder="Price (default 100)"
           className="input w-full"
         />
 
-        {/* Summary */}
         <textarea
           name="summary"
-          value={selectedBook.summary || ""}
-          onChange={(e) =>
-            setSelectedBook({ ...selectedBook, summary: e.target.value })
-          }
+          placeholder="Summary"
           className="textarea w-full"
           required
         />
 
-        {/* Cover */}
         <input
           name="coverImage"
-          value={selectedBook.coverImage || ""}
-          onChange={(e) =>
-            setSelectedBook({ ...selectedBook, coverImage: e.target.value })
-          }
+          placeholder="Cover Image URL"
           className="input w-full"
           required
         />
@@ -166,9 +107,16 @@ const AddBook = () => {
           readOnly
           className="input w-full"
         />
-        <input value={user.email || ""} readOnly className="input w-full" />
 
-        <button className="btn btn-primary w-full">Add Book</button>
+        <input
+          value={user.email || ""}
+          readOnly
+          className="input w-full"
+        />
+
+        <button className="btn btn-primary w-full">
+          Add Book
+        </button>
       </form>
     </div>
   );

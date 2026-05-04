@@ -1,87 +1,50 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../components/AuthContext/AuthContext";
-import { useParams } from "react-router";
+import { useParams, useNavigate } from "react-router";
 import axios from "axios";
 
 const UpdateService = () => {
   const { user } = useContext(AuthContext);
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const [service, setService] = useState(null);
-  const [selectedBook, setSelectedBook] = useState({});
-  const [booksData, setBooksData] = useState([]);
-  const [category, setCategory] = useState("");
 
-  useEffect(() => {
-    axios
-      .get("http://localhost:3000/books")
-      .then((res) => setBooksData(res.data))
-      .catch((err) => console.log(err));
-  }, []);
-
+  // 🔹 single book load
   useEffect(() => {
     axios
       .get(`http://localhost:3000/books/${id}`)
-      .then((res) => {
-        setService(res.data);
-        setSelectedBook(res.data);
-        setCategory(res.data?.category || "");
-      })
+      .then((res) => setService(res.data))
       .catch((err) => console.log(err));
   }, [id]);
 
-  const genres = [...new Set(booksData.map((book) => book.genre))];
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-
-    setSelectedBook((prev) => ({
-      ...prev,
-      [name]: name === "rating" || name === "price" ? Number(value) : value,
-    }));
-  };
-
-  const handleGenreChange = (e) => {
-    const selectedGenre = e.target.value;
-
-    const foundBook = booksData.find((book) => book.genre === selectedGenre);
-
-    if (foundBook) {
-      setSelectedBook((prev) => ({
-        ...prev,
-        ...foundBook,
-        genre: selectedGenre,
-        price: foundBook.price || prev.price || 100,
-      }));
-    } else {
-      setSelectedBook((prev) => ({
-        ...prev,
-        genre: selectedGenre,
-      }));
-    }
-  };
-
   const handleUpdate = (e) => {
     e.preventDefault();
+    const form = e.target;
 
-    const { _id, ...rest } = selectedBook;
-
-    const updatedBook = {
-      ...rest,
-      rating: parseFloat(rest.rating),
-      price: parseFloat(rest.price) || 100,
-      category: category,
+    const formData = {
+      title: form.title.value,
+      author: form.author.value,
+      genre: form.genre.value,
+      rating: parseFloat(form.rating.value),
+      price: parseFloat(form.price.value) || 100,
+      summary: form.summary.value,
+      coverImage: form.coverImage.value,
+      category: form.category.value,
       userName: user?.displayName || "",
       userEmail: user?.email || "",
     };
 
+    console.log(formData);
+
     axios
-      .put(`http://localhost:3000/books/${id}`, updatedBook)
+      .put(`http://localhost:3000/update/${id}`, formData)
       .then((res) => {
         console.log("Updated:", res.data);
 
         if (res.data.modifiedCount > 0) {
           alert("Book updated successfully!");
+          navigate("/");
         } else {
           alert("No changes detected!");
         }
@@ -96,84 +59,89 @@ const UpdateService = () => {
     return <p className="text-center mt-10">Loading...</p>;
   }
 
+  if (!user) {
+    return <p className="text-center mt-10">Please login first</p>;
+  }
+
   return (
     <div className="max-w-3xl mx-auto p-6">
-      <h2 className="text-2xl font-bold mb-4">Update Listing</h2>
+      <h2 className="text-2xl font-bold mb-4">Update Book</h2>
 
       <form onSubmit={handleUpdate} className="space-y-4">
         <input
           name="title"
-          value={selectedBook.title || ""}
-          onChange={handleChange}
-          className="input input-bordered w-full"
+          defaultValue={service.title}
+          className="input w-full"
+          required
         />
 
         <input
           name="author"
-          value={selectedBook.author || ""}
-          onChange={handleChange}
-          className="input input-bordered w-full"
+          defaultValue={service.author}
+          className="input w-full"
+          required
         />
 
-        <select
+        <input
           name="genre"
-          value={selectedBook.genre || ""}
-          onChange={handleGenreChange}
-          className="select select-bordered w-full"
-        >
-          <option value="">Select Genre</option>
-          {genres.map((genre, i) => (
-            <option key={i} value={genre}>
-              {genre}
-            </option>
-          ))}
-        </select>
+          defaultValue={service.genre}
+          className="input w-full"
+          required
+        />
 
         <input
           type="number"
           name="rating"
-          value={selectedBook.rating || ""}
-          onChange={handleChange}
-          className="input input-bordered w-full"
+          step="0.1"
+          min="0"
+          max="5"
+          defaultValue={service.rating}
+          className="input w-full"
+          required
         />
 
         <input
           type="number"
           name="price"
-          value={selectedBook.price || 100}
-          onChange={handleChange}
-          className="input input-bordered w-full"
+          defaultValue={service.price}
+          className="input w-full"
         />
 
         <textarea
           name="summary"
-          value={selectedBook.summary || ""}
-          onChange={handleChange}
-          className="textarea textarea-bordered w-full"
+          defaultValue={service.summary}
+          className="textarea w-full"
+          required
         />
 
         <input
           name="coverImage"
-          value={selectedBook.coverImage || ""}
-          onChange={handleChange}
-          className="input input-bordered w-full"
+          defaultValue={service.coverImage}
+          className="input w-full"
+          required
         />
 
         <input
           name="category"
-          value={category}
-          onChange={(e) => setCategory(e.target.value)}
-          className="input input-bordered w-full"
+          defaultValue={service.category}
+          className="input w-full"
         />
 
         <input
-          value={user?.displayName || ""}
+          value={user.displayName || ""}
           readOnly
           className="input w-full"
         />
-        <input value={user?.email || ""} readOnly className="input w-full" />
 
-        <button className="btn btn-primary w-full">Update Book</button>
+        <input
+          value={user.email || ""}
+          readOnly
+          className="input w-full"
+        />
+
+        <button className="btn btn-primary w-full">
+          Update Book
+        </button>
       </form>
     </div>
   );

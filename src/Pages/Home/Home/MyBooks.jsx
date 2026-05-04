@@ -1,11 +1,26 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../components/AuthContext/AuthContext";
 import { Link } from "react-router";
+import axios from "axios";
 
 const MyBooks = () => {
   const [MyBooks, setMyBooks] = useState([]);
   const { user, loading } = useContext(AuthContext);
   // console.log(user);
+  const handleDelete = (id) => {
+    axios.delete(`http://localhost:3000/books/${id}`)
+      .then(res => {
+        console.log(res.data);
+        const filterData = MyBooks.filter(book => book._id != id)
+        console.log(filterData);
+        setMyBooks(filterData)
+      
+      })
+      .catch(error => {
+      console.log(error);
+      
+    })
+  }
 
   useEffect(() => {
     if (loading) return;
@@ -58,7 +73,7 @@ const MyBooks = () => {
                 </td>
                 <td>{book?.userEmail}</td>
                 <th className="flex gap-3">
-                  <button className="btn btn-error btn-xs">Delete</button>
+                  <button onClick={()=>handleDelete(book?._id)} className="btn btn-error btn-xs">Delete</button>
                   <Link to={`/update-service/${book?._id}`}>
                     <button className="btn btn-primary btn-xs">Edit</button>
                   </Link>

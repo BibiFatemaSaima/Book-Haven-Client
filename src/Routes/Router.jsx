@@ -48,15 +48,15 @@ export const router = createBrowserRouter([
       },
       {
         path: "add-book",
-        Component: AddBook,
+       element:<PrivateRoute><AddBook></AddBook></PrivateRoute>
       },
       {
         path: 'my-profile',
-        Component: MyProfile,
+        element:<PrivateRoute><MyProfile></MyProfile></PrivateRoute>
       },
       {
         path: "my-books",
-        Component: MyBooks,
+      element:<PrivateRoute><MyBooks></MyBooks></PrivateRoute>
       },
       {
         path: "update-service/:id",
