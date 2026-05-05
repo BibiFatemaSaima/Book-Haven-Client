@@ -6,9 +6,8 @@ const Navbar = () => {
   const { user, signOutUser } = useContext(AuthContext);
 
   const handleLogout = () => {
-    signOutUser()
-      .then(() => console.log("Logout successful"))
-      // .catch((error) => console.error(error));
+    signOutUser().then(() => console.log("Logout successful"));
+    // .catch((error) => console.error(error));
   };
 
   const activeClass = ({ isActive }) =>
@@ -112,18 +111,7 @@ const Navbar = () => {
               </li>
             </>
           ) : (
-            <>
-              <li>
-                <NavLink to="/login" className={activeClass}>
-                  Login
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/register" className={activeClass}>
-                  Register
-                </NavLink>
-              </li>
-            </>
+            <></>
           )}
         </ul>
       </div>
@@ -161,9 +149,14 @@ const Navbar = () => {
             </div>
           </div>
         ) : (
-          <NavLink to="/login" className="btn btn-primary">
-            Login
-          </NavLink>
+          <div className="flex gap-2">
+            <NavLink to="/login" className="btn btn-primary">
+              Login
+            </NavLink>
+            <NavLink to="/register" className="btn btn-primary">
+              Register
+            </NavLink>
+          </div>
         )}
       </div>
     </div>

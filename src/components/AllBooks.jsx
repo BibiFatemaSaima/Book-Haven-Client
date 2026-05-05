@@ -9,20 +9,16 @@ const AllBooks = () => {
   const [category, setCategory] = useState("All");
   const [sort, setSort] = useState("");
 
-  // View Details
   const handleDetailsClick = (book) => {
     navigate(`/books/${book._id}`);
   };
 
-  // Loader safety check
   if (!data || !Array.isArray(data)) {
     return <p className="text-center p-10">No books found</p>;
   }
 
-  // Dynamic genres
   const genres = ["All", ...new Set(data.map((b) => b.genre))];
 
-  //  Filter + Search + Sort
   const filteredBooks = useMemo(() => {
     let filtered = [...data];
 
@@ -42,7 +38,7 @@ const AllBooks = () => {
       );
     }
 
-    // sort by rating
+    // sort
     if (sort === "asc") {
       filtered.sort((a, b) => a.rating - b.rating);
     } else if (sort === "desc") {
@@ -55,10 +51,8 @@ const AllBooks = () => {
   return (
     <div className="p-5">
 
-      {/*  FILTER BAR */}
+      {/* FILTER BAR */}
       <div className="flex flex-col md:flex-row gap-4 mb-6">
-
-        {/* Search */}
         <input
           type="text"
           placeholder="Search by title or author..."
@@ -67,7 +61,6 @@ const AllBooks = () => {
           onChange={(e) => setSearch(e.target.value)}
         />
 
-        {/* Category */}
         <select
           className="select select-bordered w-full md:w-1/4"
           value={category}
@@ -80,7 +73,6 @@ const AllBooks = () => {
           ))}
         </select>
 
-        {/* Sort */}
         <select
           className="select select-bordered w-full md:w-1/4"
           value={sort}
@@ -90,66 +82,56 @@ const AllBooks = () => {
           <option value="asc">Low → High</option>
           <option value="desc">High → Low</option>
         </select>
-
       </div>
 
-      {/* 📚 BOOK GRID */}
+      {/* TABLE */}
       {filteredBooks.length === 0 ? (
         <p className="text-center p-10">No books found</p>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredBooks.map((book) => (
-            <div
-              key={book._id}
-              className="card bg-base-100 shadow-sm border border-gray-200"
-            >
-              <figure className="px-4 pt-4">
-                <img
-                  className="rounded-xl h-60 w-full object-cover"
-                  src={book?.coverImage}
-                  alt={book.title}
-                />
-              </figure>
+        <div className="overflow-x-auto">
+          <table className="table table-zebra w-full">
 
-              <div className="card-body">
-                <h2 className="card-title text-lg font-bold">
-                  {book.title}
-                </h2>
+            {/* HEAD */}
+            <thead className="bg-base-200">
+              <tr>
+                <th>#</th>
+                <th>Book Name</th>
+                <th>Author</th>
+                <th>Genre</th>
+                <th>Rating ⭐</th>
+                <th>Action</th>
+              </tr>
+            </thead>
 
-                <p>
-                  <span className="font-semibold">Author:</span>{" "}
-                  {book.author}
-                </p>
+            {/* BODY */}
+            <tbody>
+              {filteredBooks.map((book, index) => (
+                <tr key={book._id}>
+                  <td>{index + 1}</td>
 
-                <p className="text-sm">
-                  <span className="font-semibold">Genre:</span>{" "}
-                  {book.genre}
-                </p>
+                  <td className="font-semibold">{book.title}</td>
 
-                <p className="line-clamp-2 text-sm text-gray-600">
-                  {book.summary}
-                </p>
+                  <td>{book.author}</td>
 
-                <div className="flex justify-between items-center mt-2">
-                  <span className="badge badge-secondary">
-                    ⭐ {book.rating}
-                  </span>
-                </div>
+                  <td>{book.genre}</td>
 
-                <div className="card-actions justify-end mt-4">
-                  <button
-                    onClick={() => handleDetailsClick(book)}
-                    className="btn btn-primary btn-sm"
-                  >
-                    View Details
-                  </button>
-                </div>
-              </div>
-            </div>
-          ))}
+                  <td>{book.rating}</td>
+
+                  <td>
+                    <button
+                      onClick={() => handleDetailsClick(book)}
+                      className="btn btn-primary btn-xs"
+                    >
+                      View Details
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+
+          </table>
         </div>
       )}
-
     </div>
   );
 };
