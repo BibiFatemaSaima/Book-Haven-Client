@@ -12,6 +12,8 @@ import PrivateRoute from "./PrivateRoute";
 import BookSlider from "../components/BookSlider";
 import MyProfile from "../Pages/Home/Home/MyProfile";
 import UpdateService from "../Pages/UpdateService";
+import TopGenres from "../Pages/Home/Home/TopGenres";
+import BookOfTheWeek from "../Pages/Home/Home/BookOfTheWeek";
 
 export const router = createBrowserRouter([
   {

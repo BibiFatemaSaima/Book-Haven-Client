@@ -2,6 +2,8 @@ import React from "react";
 
 import BookService from "./BookService";
 import BookSlider from "../../../components/BookSlider";
+import TopGenres from "./TopGenres";
+import BookOfTheWeek from "./BookOfTheWeek";
 
 const Home = () => {
   return (
@@ -12,7 +14,9 @@ const Home = () => {
       <h1 className="text-3xl font-bold text-center my-8">
         Welcome to Book Store
       </h1>
-     <BookService></BookService>
+      <BookService></BookService>
+      <TopGenres></TopGenres>
+      <BookOfTheWeek></BookOfTheWeek>
     </div>
   );
 };
