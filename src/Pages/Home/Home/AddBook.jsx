@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../../../components/AuthContext/AuthContext";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 const AddBook = () => {
   const { user } = useContext(AuthContext);
@@ -30,13 +31,22 @@ const AddBook = () => {
     };
 
     axios
-      .post("http://localhost:3000/books", formData)
+      .post(
+        "https://assignment-10-server-gold-delta.vercel.app/books",
+        formData
+      )
       .then((res) => {
         console.log(res.data);
-        alert("Book added successfully!");
+
+        toast.success("Book added successfully!");
+
         form.reset();
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+
+        toast.error("Failed to add book!");
+      });
   };
 
   if (!user) {
@@ -51,21 +61,21 @@ const AddBook = () => {
         <input
           name="title"
           placeholder="Title"
-          className="input w-full"
+          className="input input-bordered w-full"
           required
         />
 
         <input
           name="author"
           placeholder="Author"
-          className="input w-full"
+          className="input input-bordered w-full"
           required
         />
 
         <input
           name="genre"
           placeholder="Genre"
-          className="input w-full"
+          className="input input-bordered w-full"
           required
         />
 
@@ -76,7 +86,7 @@ const AddBook = () => {
           min="0"
           max="5"
           placeholder="Rating"
-          className="input w-full"
+          className="input input-bordered w-full"
           required
         />
 
@@ -84,20 +94,20 @@ const AddBook = () => {
           type="number"
           name="price"
           placeholder="Price (default 100)"
-          className="input w-full"
+          className="input input-bordered w-full"
         />
 
         <textarea
           name="summary"
           placeholder="Summary"
-          className="textarea w-full"
+          className="textarea textarea-bordered w-full"
           required
         />
 
         <input
           name="coverImage"
           placeholder="Cover Image URL"
-          className="input w-full"
+          className="input input-bordered w-full"
           required
         />
 
@@ -105,13 +115,13 @@ const AddBook = () => {
         <input
           value={user.displayName || ""}
           readOnly
-          className="input w-full"
+          className="input input-bordered w-full"
         />
 
         <input
           value={user.email || ""}
           readOnly
-          className="input w-full"
+          className="input input-bordered w-full"
         />
 
         <button className="btn btn-primary w-full">

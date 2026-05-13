@@ -24,7 +24,9 @@ export const router = createBrowserRouter([
         index: true,
         Component: Home,
         loader: async () => {
-          const response = await axios.get("http://localhost:3000/books");
+          const response = await axios.get(
+            "https://assignment-10-server-gold-delta.vercel.app/books",
+          );
           return response.data;
         },
       },
@@ -32,7 +34,9 @@ export const router = createBrowserRouter([
         path: "/all-books",
         Component: AllBooks,
         loader: async () => {
-          const response = await axios.get("http://localhost:3000/books");
+          const response = await axios.get(
+            "https://assignment-10-server-gold-delta.vercel.app/books",
+          );
           return response.data;
         },
       },
@@ -45,20 +49,32 @@ export const router = createBrowserRouter([
         Component: Register,
       },
       {
-        path: 'Book-slider',
+        path: "Book-slider",
         Component: BookSlider,
       },
       {
         path: "add-book",
-       element:<PrivateRoute><AddBook></AddBook></PrivateRoute>
+        element: (
+          <PrivateRoute>
+            <AddBook></AddBook>
+          </PrivateRoute>
+        ),
       },
       {
-        path: 'my-profile',
-        element:<PrivateRoute><MyProfile></MyProfile></PrivateRoute>
+        path: "my-profile",
+        element: (
+          <PrivateRoute>
+            <MyProfile></MyProfile>
+          </PrivateRoute>
+        ),
       },
       {
         path: "my-books",
-      element:<PrivateRoute><MyBooks></MyBooks></PrivateRoute>
+        element: (
+          <PrivateRoute>
+            <MyBooks></MyBooks>
+          </PrivateRoute>
+        ),
       },
       {
         path: "update-service/:id",
@@ -72,7 +88,9 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: async ({ params }) => {
-          return fetch(`http://localhost:3000/books/${params.id}`);
+          return fetch(
+            `https://assignment-10-server-gold-delta.vercel.app/books/${params.id}`,
+          );
         },
       },
     ],

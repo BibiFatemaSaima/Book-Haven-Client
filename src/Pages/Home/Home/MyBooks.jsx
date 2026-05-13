@@ -8,7 +8,7 @@ const MyBooks = () => {
   const { user, loading } = useContext(AuthContext);
   // console.log(user);
   const handleDelete = (id) => {
-    axios.delete(`http://localhost:3000/books/${id}`)
+    axios.delete(`https://assignment-10-server-gold-delta.vercel.app/books/${id}`)
       .then(res => {
         console.log(res.data);
         const filterData = MyBooks.filter(book => book._id != id)
@@ -24,7 +24,7 @@ const MyBooks = () => {
 
   useEffect(() => {
     if (loading) return;
-    fetch(`http://localhost:3000/my-books?email=${user?.email}`)
+    fetch(`https://assignment-10-server-gold-delta.vercel.app/my-books?email=${user?.email}`)
       .then((res) => res.json())
       .then((data) => setMyBooks(data));
     // .catch((err) => console.log(err));

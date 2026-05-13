@@ -13,7 +13,7 @@ const UpdateService = () => {
   // 🔹 single book load
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/books/${id}`)
+      .get(`https://assignment-10-server-gold-delta.vercel.app/books/${id}`)
       .then((res) => setService(res.data))
       .catch((err) => console.log(err));
   }, [id]);
@@ -38,7 +38,7 @@ const UpdateService = () => {
     console.log(formData);
 
     axios
-      .put(`http://localhost:3000/update/${id}`, formData)
+      .put(`https://assignment-10-server-gold-delta.vercel.app/update/${id}`, formData)
       .then((res) => {
         console.log("Updated:", res.data);
 

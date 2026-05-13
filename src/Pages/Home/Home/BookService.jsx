@@ -10,7 +10,7 @@ const BookService = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/books")
+      .get("https://assignment-10-server-gold-delta.vercel.app/books")
       .then((res) => {
         const latest = res.data.slice(-6).reverse();
         setBooks(latest);

@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { AuthContext } from "../../../components/AuthContext/AuthContext";
 import { updateProfile } from "firebase/auth";
 import { auth } from "../../../components/firebase/firebase.init";
+import toast from "react-hot-toast";
 
 const MyProfile = () => {
   const { user } = useContext(AuthContext);
@@ -19,10 +20,15 @@ const MyProfile = () => {
       photoURL: photo,
     })
       .then(() => {
-        alert("Profile updated successfully!");
+        toast.success("Profile updated successfully!");
+
         setIsEditing(false);
       })
-      // .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+
+        toast.error("Failed to update profile!");
+      });
   };
 
   return (
@@ -36,7 +42,10 @@ const MyProfile = () => {
           alt="User"
           className="w-28 h-28 rounded-full border"
         />
-        <h3 className="text-xl font-semibold">{user?.displayName}</h3>
+
+        <h3 className="text-xl font-semibold">
+          {user?.displayName}
+        </h3>
       </div>
 
       {/* Profile Info */}
@@ -54,7 +63,10 @@ const MyProfile = () => {
       ) : (
         <form onSubmit={handleUpdate} className="mt-4 space-y-3">
           <div>
-            <label className="block font-medium mb-1">Name</label>
+            <label className="block font-medium mb-1">
+              Name
+            </label>
+
             <input
               type="text"
               className="input input-bordered w-full"
@@ -64,7 +76,10 @@ const MyProfile = () => {
           </div>
 
           <div>
-            <label className="block font-medium mb-1">Photo URL</label>
+            <label className="block font-medium mb-1">
+              Photo URL
+            </label>
+
             <input
               type="text"
               className="input input-bordered w-full"
@@ -73,7 +88,9 @@ const MyProfile = () => {
             />
           </div>
 
-          <button className="btn btn-primary w-full">Save Changes</button>
+          <button className="btn btn-primary w-full">
+            Save Changes
+          </button>
 
           <button
             type="button"

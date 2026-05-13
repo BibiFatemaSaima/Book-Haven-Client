@@ -12,7 +12,7 @@ const BookDetails = () => {
   useEffect(() => {
     const fetchBook = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/books/${id}`);
+        const response = await axios.get(`https://assignment-10-server-gold-delta.vercel.app/books/${id}`);
         setBook(response.data);
       } catch (err) {
         console.error(err);
@@ -44,7 +44,7 @@ const BookDetails = () => {
 
     try {
       const res = await axios.post(
-        "http://localhost:3000/orders",
+        "https://assignment-10-server-gold-delta.vercel.app/orders",
         orderData
       );
 
